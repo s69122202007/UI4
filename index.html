@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>อบต.เมืองเก่า – เว็บไซต์ต้นแบบ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f4f7f4;--card:#fff;--tx:#1d2b22;--mut:#5f6f65;--pri:#1b6b3a;--pri2:#0f4d28;--soft:#e6f3ea;--bd:#dbe5dd;--ft:#0f4d28;color-scheme:light;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1712;--card:#17221b;--tx:#e8f1ea;--mut:#9db0a2;--pri:#4cbf7a;--pri2:#2f9a5b;--soft:#1e3326;--bd:#2a3b30;--ft:#0a120d;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0f1712;--card:#17221b;--tx:#e8f1ea;--mut:#9db0a2;--pri:#4cbf7a;--pri2:#2f9a5b;--soft:#1e3326;--bd:#2a3b30;--ft:#0a120d;color-scheme:dark}
+html{scroll-padding-top:calc(70px + env(safe-area-inset-top,0px));scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:Sarabun,"Noto Sans Thai",system-ui,sans-serif;line-height:1.6}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--card);z-index:60}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer}
+.wrap{max-width:1100px;margin:auto;padding:0 16px}
+header{position:sticky;top:env(safe-area-inset-top,0px);background:var(--card);border-bottom:1px solid var(--bd);z-index:50}
+.nav{display:flex;align-items:center;gap:12px;height:64px}
+.logo{display:flex;align-items:center;gap:10px;margin-right:auto}
+.logo i{width:38px;height:38px;border-radius:50%;background:var(--pri);color:#fff;display:grid;place-items:center;font-style:normal;font-size:20px}
+.logo b{display:block;font-size:15px;line-height:1.2}.logo small{color:var(--mut);font-size:11px}
+nav{display:flex;gap:4px}
+nav a{padding:8px 12px;border-radius:8px;font-weight:500;font-size:14px;color:var(--mut)}
+nav a:hover{background:var(--soft)}
+nav a.on{color:var(--pri);box-shadow:inset 0 -2px var(--pri)}
+.ib{border:1px solid var(--bd);background:var(--card);color:var(--tx);width:38px;height:38px;border-radius:10px;font-size:17px}
+.ib:hover{background:var(--soft)}
+#menu{display:none}
+@media(max-width:760px){#menu{display:block}
+nav{display:none;position:absolute;top:64px;left:0;right:0;background:var(--card);flex-direction:column;padding:8px 16px 14px;border-bottom:1px solid var(--bd)}
+nav.open{display:flex}.logo small{display:none}}
+.view{display:none;animation:fade .35s}.view.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.hero{background:linear-gradient(160deg,rgba(15,77,40,.88),rgba(38,130,80,.7)),repeating-linear-gradient(45deg,#2c7a4b 0 12px,#256b41 12px 24px);color:#fff;padding:72px 0 110px;text-align:left}
+.hero h1{font-size:clamp(34px,6vw,54px);margin:0 0 6px}
+.hero p{font-size:clamp(16px,2.4vw,21px);margin:0 0 20px;opacity:.95}
+.btn{display:inline-block;background:var(--pri);color:#fff;border:0;border-radius:10px;padding:10px 20px;font-weight:600;transition:.2s}
+.btn:hover{background:var(--pri2);transform:translateY(-1px)}
+.btn.o{background:transparent;color:var(--pri);border:1.5px solid var(--pri);padding:6px 14px;font-size:14px}
+.btn.o:hover{background:var(--pri);color:#fff}
+.pop{margin-top:-64px;background:var(--card);border-radius:16px;padding:20px;box-shadow:0 8px 28px rgba(0,0,0,.12);position:relative}
+h2{font-size:22px;margin:0 0 14px}
+.pop h2{text-align:center}
+.grid5{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.tile{display:flex;flex-direction:column;align-items:center;gap:8px;padding:14px 6px;border:1px solid var(--bd);border-radius:12px;background:var(--card);font-size:14px;font-weight:500;text-align:center;color:var(--tx);transition:.2s}
+.tile:hover{transform:translateY(-3px);border-color:var(--pri);box-shadow:0 6px 16px rgba(27,107,58,.18)}
+.ico{width:52px;height:52px;border-radius:50%;background:var(--soft);display:grid;place-items:center;font-size:26px}
+@media(max-width:700px){.grid5{grid-template-columns:repeat(3,1fr)}}
+section{padding:32px 0}
+.sh{display:flex;justify-content:space-between;align-items:baseline}
+.sh a{color:var(--pri);font-size:14px;font-weight:600}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:14px;overflow:hidden;transition:.2s;cursor:pointer}
+.card:hover{transform:translateY(-4px);box-shadow:0 10px 24px rgba(0,0,0,.12)}
+.th{height:130px;display:grid;place-items:center;font-size:44px}
+.card div.b{padding:12px 14px 14px}
+.card small{color:var(--mut)}
+.card h3{font-size:15px;margin:4px 0 8px;line-height:1.4}
+.about{display:grid;grid-template-columns:1fr 1.2fr;gap:24px;align-items:center;background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:20px}
+.about .th{height:200px;border-radius:12px;background:linear-gradient(135deg,#c9e4d1,#8cc7a1)}
+@media(max-width:700px){.about{grid-template-columns:1fr}}
+.tools{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.sb{display:flex;flex:1;min-width:200px}
+.sb input,select{font:inherit;padding:10px 14px;border:1px solid var(--bd);background:var(--card);color:var(--tx);border-radius:10px 0 0 10px;flex:1;min-width:0}
+.sb button{border:0;background:var(--pri);color:#fff;padding:0 16px;border-radius:0 10px 10px 0}
+select{border-radius:10px;flex:0}
+.chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;margin-bottom:12px}
+.chip{white-space:nowrap;border:1px solid var(--bd);background:var(--card);color:var(--tx);border-radius:20px;padding:5px 14px;font-size:14px}
+.chip.on{background:var(--pri);color:#fff;border-color:var(--pri)}
+.n{display:flex;gap:14px;align-items:center;background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:12px;margin-bottom:10px;transition:.2s}
+.n:hover{border-color:var(--pri);transform:translateX(3px)}
+.n .th{width:96px;height:72px;border-radius:8px;font-size:30px;flex:none}
+.n .t{flex:1;min-width:0}
+.tag{display:inline-block;font-size:12px;color:var(--pri);font-weight:600}
+.n h3{font-size:15px;margin:0;line-height:1.4}
+.n small{color:var(--mut)}
+@media(max-width:560px){.n{flex-wrap:wrap}.n .th{width:64px;height:64px}.n .btn{width:100%;text-align:center}}
+.pg{display:flex;justify-content:center;gap:6px;margin-top:16px;flex-wrap:wrap}
+.pg button{min-width:36px;height:36px;border:1px solid var(--bd);background:var(--card);color:var(--tx);border-radius:8px}
+.pg button.on{background:var(--pri);color:#fff;border-color:var(--pri)}
+.pg button:disabled{opacity:.4;cursor:default}
+.empty{text-align:center;color:var(--mut);padding:40px 0}
+.sv{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px}
+.sv .card{text-align:center;padding:20px 14px;cursor:default}
+.sv .ico{margin:0 auto 10px;width:62px;height:62px;font-size:30px}
+.sv p{font-size:13px;color:var(--mut);margin:4px 0 12px}
+.sv h3{margin:0;font-size:16px}
+.center{text-align:center;color:var(--mut);margin:-8px 0 16px}
+footer{background:var(--ft);color:#e8f1ea;margin-top:24px;padding:28px 0 20px;font-size:14px}
+.fg{display:grid;grid-template-columns:1.4fr 1fr 1.4fr auto;gap:24px}
+@media(max-width:760px){.fg{grid-template-columns:1fr 1fr}}
+footer b{display:block;margin-bottom:6px}footer a{display:block;opacity:.85}footer a:hover{opacity:1;text-decoration:underline}
+.copy{text-align:center;opacity:.7;font-size:12px;margin-top:18px;border-top:1px solid rgba(255,255,255,.15);padding-top:12px}
+.note{background:var(--soft);color:var(--mut);text-align:center;font-size:12px;padding:4px}
+#modal{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;place-items:center;z-index:100;padding:16px}
+#modal.on{display:grid}
+.mb{background:var(--card);border-radius:16px;padding:24px;max-width:440px;width:100%;animation:fade .25s}
+.mb h3{margin:0 0 8px;font-size:20px}
+.mb ul{padding-left:20px;color:var(--mut)}
+.mb .row{display:flex;gap:8px;justify-content:flex-end;margin-top:16px}
+#top{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));opacity:0;pointer-events:none;transition:.2s;background:var(--pri);color:#fff;border-color:var(--pri);z-index:40}
+#top.on{opacity:1;pointer-events:auto}
+#toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translate(-50%,40px);background:var(--tx);color:var(--bg);padding:8px 16px;border-radius:20px;opacity:0;transition:.3s;z-index:120;font-size:14px}
+#toast.on{opacity:1;transform:translate(-50%,0)}
+</style>
+</head>
+<body>
+<div class="note">เว็บไซต์ต้นแบบเพื่อการศึกษาเท่านั้น ไม่ใช่เว็บไซต์ทางการ</div>
+<header><div class="wrap nav">
+<a class="logo" href="#home"><i>🌿</i><span><b>องค์การบริหารส่วนตำบลเมืองเก่า</b><small>อำเภอเมืองเก่า จังหวัดนิรันดร์บุรี</small></span></a>
+<nav id="nav"><a href="#home" data-v="home">หน้าแรก</a><a href="#news" data-v="news">ข่าวสาร</a><a href="#services" data-v="services">บริการประชาชน</a><a href="#about" data-v="about">เกี่ยวกับ อบต.</a><a href="#contact" data-v="contact">ติดต่อเรา</a></nav>
+<button class="ib" id="srch" title="ค้นหา ( / )">🔍</button>
+<button class="ib" id="theme" title="สลับโหมดสว่าง/มืด">🌓</button>
+<button class="ib" id="menu" title="เมนู">☰</button>
+</div></header>
+
+<main>
+<div class="view" id="v-home">
+<div class="hero"><div class="wrap"><h1>อบต.เมืองเก่า</h1><p>พัฒนาเมืองเก่า น่าอยู่ อย่างยั่งยืน</p><a class="btn" href="#about">เกี่ยวกับเรา</a></div></div>
+<div class="wrap">
+<div class="pop"><h2>บริการยอดนิยม</h2><div class="grid5" id="popular"></div></div>
+<section><div class="sh"><h2>ข่าวประชาสัมพันธ์ล่าสุด</h2><a href="#news">ดูทั้งหมด →</a></div><div class="cards" id="latest"></div></section>
+<section id="about"><div class="about"><div class="th">🏛️</div><div><h2>เกี่ยวกับ อบต.เมืองเก่า</h2><p>องค์การบริหารส่วนตำบลเมืองเก่า มุ่งมั่นพัฒนาพื้นที่และคุณภาพชีวิตของประชาชน ให้มีความเป็นอยู่ที่ดีอย่างยั่งยืน</p><button class="btn" data-toast="ข้อมูลหน่วยงาน (ตัวอย่าง)">ข้อมูลหน่วยงาน</button></div></div></section>
+</div></div>
+
+<div class="view" id="v-news"><div class="wrap"><section>
+<h2>ข่าวสารและประกาศ</h2>
+<div class="tools"><div class="sb"><input id="nq" type="search" placeholder="ค้นหาข่าว..."><button aria-label="ค้นหา">🔍</button></div><select id="nsort"><option value="d">ใหม่สุดก่อน</option><option value="a">เก่าสุดก่อน</option></select></div>
+<div class="chips" id="chips"></div>
+<div id="nlist"></div><div class="pg" id="pg"></div>
+</section></div></div>
+
+<div class="view" id="v-services"><div class="wrap"><section>
+<h2 style="text-align:center">บริการประชาชน</h2><p class="center">บริการออนไลน์และข้อมูลเพื่ออำนวยความสะดวกแก่ประชาชน</p>
+<div class="tools" style="max-width:520px;margin:0 auto 18px"><div class="sb"><input id="sq" type="search" placeholder="ค้นหาบริการ..."><button aria-label="ค้นหา">🔍</button></div></div>
+<div class="sv" id="svl"></div><div class="empty" id="sempty" hidden>ไม่พบบริการที่ค้นหา</div>
+</section></div></div>
+</main>
+
+<footer id="contact"><div class="wrap"><div class="fg">
+<div><b>🌿 องค์การบริหารส่วนตำบลเมืองเก่า</b>อำเภอเมืองเก่า จังหวัดนิรันดร์บุรี</div>
+<div><b>เมนู</b><a href="#home">หน้าแรก</a><a href="#news">ข่าวสาร</a><a href="#services">บริการประชาชน</a></div>
+<div><b>ติดต่อเรา</b><a href="tel:0374551355">📞 037-455-135</a><a href="mailto:muangkao.local@gmail.com">✉️ muangkao.local@gmail.com</a><a href="#" data-copy="99 หมู่ 1 ต.เมืองเก่า อ.เมืองเก่า จ.นิรันดร์บุรี 25110">📍 99 หมู่ 1 ต.เมืองเก่า (แตะเพื่อคัดลอก)</a></div>
+<div><b>ติดตามเรา</b><a href="#" data-toast="ลิงก์ตัวอย่าง">📘 Facebook</a></div>
+</div><div class="copy">© 2024 องค์การบริหารส่วนตำบลเมืองเก่า สงวนลิขสิทธิ์ · เว็บไซต์ต้นแบบ</div></div></footer>
+
+<div id="modal"><div class="mb" role="dialog"><h3 id="mt"></h3><p id="md" style="color:var(--mut);margin:0"></p><ul id="ml"></ul><div class="row"><button class="btn o" id="mc">ปิด</button><button class="btn" id="mg">ดำเนินการต่อ</button></div></div></div>
+<button class="ib" id="top" title="กลับขึ้นบน">↑</button>
+<div id="toast"></div>
+
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const SV=[
+["📋","แบบฟอร์มดาวน์โหลด","ดาวน์โหลดแบบฟอร์มคำร้องต่าง ๆ สำหรับยื่นเรื่อง",["คำร้องทั่วไป","แบบขอรับเงินสนับสนุน","แบบแจ้งย้ายที่อยู่"]],
+["🏠","ภาษีและรายได้","ข้อมูลการชำระภาษีท้องถิ่นและค่าธรรมเนียม",["ภาษีที่ดินและสิ่งปลูกสร้าง","ภาษีป้าย","ค่าธรรมเนียมขยะ"]],
+["👪","เบี้ยยังชีพและสวัสดิการ","สิทธิ์ผู้สูงอายุ ผู้พิการ และผู้ป่วยเอดส์",["ตรวจสอบสิทธิ์","เอกสารที่ต้องใช้","ช่วงเวลาลงทะเบียน"]],
+["📣","ร้องเรียน / ร้องทุกข์","แจ้งปัญหา ข้อร้องเรียน และข้อเสนอแนะ",["แจ้งถนนชำรุด","แจ้งไฟฟ้าสาธารณะ","ร้องเรียนทั่วไป"]],
+["📖","คู่มือประชาชน","คู่มือขั้นตอนการขอรับบริการต่าง ๆ",["ขั้นตอนการขอใบอนุญาต","ระยะเวลาดำเนินการ","ค่าธรรมเนียม"]],
+["🧾","ข้อมูลการจัดซื้อจัดจ้าง","ประกาศและผลการจัดซื้อจัดจ้างของหน่วยงาน",["ประกาศราคากลาง","ประกาศผู้ชนะ","รายงานสรุปผล"]],
+["🌳","สถานที่ท่องเที่ยว","แหล่งท่องเที่ยวและวัฒนธรรมในพื้นที่",["วัดเมืองเก่า","ลำน้ำสายหลัก","ตลาดชุมชน"]],
+["🗓️","แผนพัฒนาและงบประมาณ","แผนพัฒนาท้องถิ่นและข้อมูลงบประมาณ",["แผนพัฒนาห้าปี","งบประมาณรายจ่าย","รายงานผล"]],
+["📞","ติดต่อเรา","ช่องทางติดต่อหน่วยงานและเวลาทำการ",["โทร 037-455-135","จันทร์–ศุกร์ 08.30–16.30","อีเมลหน่วยงาน"]]];
+const CATS=["ทั้งหมด","ข่าวประชาสัมพันธ์","ประกาศจัดซื้อจัดจ้าง","รับสมัครงาน","แผนงาน","อื่น ๆ"];
+const NW=[
+[1,"ประชาสัมพันธ์การชำระภาษีที่ดินและสิ่งปลูกสร้าง ประจำปี 2567","2567-05-20","👨‍🌾"],
+[1,"โครงการรณรงค์พัฒนาสิ่งแวดล้อม ประจำปี 2567","2567-05-17","🌲"],
+[2,"ประกาศประกวดราคาจ้างก่อสร้างถนนคอนกรีตเสริมเหล็ก หมู่ที่ 3","2567-05-15","🚧"],
+[3,"ประกาศรับสมัครบุคคลเพื่อสรรหาเป็นพนักงานจ้าง ประจำปี 2567","2567-05-15","📄"],
+[4,"รายงานผลการดำเนินงาน ประจำปีงบประมาณ พ.ศ. 2566","2567-05-10","📊"],
+[1,"เชิญชวนร่วมกิจกรรมวันสำคัญทางศาสนาและวัฒนธรรม","2567-05-08","🪔"],
+[1,"กำหนดการฉีดวัคซีนป้องกันโรคพิษสุนัขบ้า","2567-05-05","💉"],
+[2,"ประกาศผลผู้ชนะการเสนอราคาซื้อวัสดุสำนักงาน","2567-05-03","🧾"],
+[3,"รับสมัครอาสาสมัครป้องกันภัยฝ่ายพลเรือน","2567-04-28","🦺"],
+[4,"แผนพัฒนาท้องถิ่น (พ.ศ. 2566–2570) ฉบับทบทวน","2567-04-25","🗺️"],
+[5,"แจ้งปิดทำการในวันหยุดนักขัตฤกษ์","2567-04-22","📢"],
+[1,"โครงการอบรมอาชีพเสริมสำหรับผู้สูงอายุ","2567-04-18","🧶"],
+[2,"ประกาศสอบราคาจ้างเหมาปรับปรุงภูมิทัศน์","2567-04-15","🌷"],
+[1,"ขอเชิญร่วมกิจกรรมปลูกต้นไม้ริมลำน้ำ","2567-04-10","🌱"]];
+const TH=["Jan"],MON=["ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค."];
+const fd=s=>{const [y,m,d]=s.split("-");return +d+" "+MON[m-1]+" "+y};
+const BG=["#cfe8d6","#d9ecc9","#f2e4c4","#d3e3ef","#e4d6ee"];
+const th=(e,i)=>`<div class="th" style="background:linear-gradient(135deg,${BG[i%5]},#a8d3b5)">${e}</div>`;
+let cat=0,page=1,PER=6;
+
+// Router
+function route(){
+  let h=(location.hash||"#home").slice(1);
+  let v=["home","news","services"].includes(h)?h:"home";
+  $$(".view").forEach(e=>e.classList.toggle("on",e.id==="v-"+v));
+  $$("nav a").forEach(a=>a.classList.toggle("on",a.dataset.v===v||(v==="home"&&a.dataset.v===h&&0)));
+  $("#nav").classList.remove("open");
+  if(h==="about"||h==="contact"){setTimeout(()=>document.getElementById(h==="about"?"about":"contact").scrollIntoView(),50)}else scrollTo(0,0);
+}
+addEventListener("hashchange",route);
+
+// Home
+$("#popular").innerHTML=[0,1,2,3,4].map(i=>`<a class="tile" href="#services" data-open="${i}"><span class="ico">${SV[i][0]}</span>${SV[i][1]}</a>`).join("");
+$("#latest").innerHTML=NW.slice(0,3).map((n,i)=>`<a class="card" href="#news">${th(n[3],i)}<div class="b"><small>${fd(n[2])}</small><h3>${n[1]}</h3><span class="tag">อ่านต่อ →</span></div></a>`).join("");
+
+// News
+$("#chips").innerHTML=CATS.map((c,i)=>`<button class="chip${i?"":" on"}" data-c="${i}">${c}</button>`).join("");
+function news(){
+  const q=$("#nq").value.trim(),asc=$("#nsort").value==="a";
+  let l=NW.map((n,i)=>({n,i})).filter(x=>(!cat||x.n[0]===cat)&&(!q||x.n[1].includes(q)));
+  l.sort((a,b)=>asc?a.n[2].localeCompare(b.n[2]):b.n[2].localeCompare(a.n[2]));
+  const pc=Math.max(1,Math.ceil(l.length/PER));page=Math.min(page,pc);
+  $("#nlist").innerHTML=l.length?l.slice((page-1)*PER,page*PER).map(({n,i})=>{
+    const dl=n[0]===2||n[0]===4;
+    return `<div class="n">${th(n[3],i).replace('class="th"','class="th"')}<div class="t"><span class="tag">${CATS[n[0]]}</span><h3>${n[1]}</h3><small>🕒 ${fd(n[2])}</small></div><button class="btn o" data-dl="${dl?1:0}" data-t="${n[1]}">${dl?"ดาวน์โหลด ⬇":"อ่านต่อ"}</button></div>`}).join(""):`<div class="empty">ไม่พบข่าวที่ตรงกับการค้นหา</div>`;
+  let p=`<button ${page==1?"disabled":""} data-p="${page-1}">‹</button>`;
+  for(let i=1;i<=pc;i++)p+=`<button class="${i==page?"on":""}" data-p="${i}">${i}</button>`;
+  $("#pg").innerHTML=l.length?p+`<button ${page==pc?"disabled":""} data-p="${page+1}">›</button>`:"";
+}
+$("#nq").oninput=()=>{page=1;news()};$("#nsort").onchange=()=>{page=1;news()};
+$("#chips").onclick=e=>{const b=e.target.closest(".chip");if(!b)return;cat=+b.dataset.c;page=1;$$(".chip").forEach(c=>c.classList.toggle("on",c===b));news()};
+$("#pg").onclick=e=>{const b=e.target.closest("button");if(!b||b.disabled)return;page=+b.dataset.p;news();$("#v-news").scrollIntoView()};
+$("#nlist").onclick=e=>{const b=e.target.closest("button");if(!b)return;
+  b.dataset.dl==="1"?toast("เริ่มดาวน์โหลดเอกสาร (ตัวอย่าง)"):modal({t:b.dataset.t,d:"รายละเอียดข่าว (ข้อมูลตัวอย่างสำหรับเว็บไซต์ต้นแบบ)",l:[],g:"ปิด"})};
+
+// Services
+function svc(){
+  const q=$("#sq").value.trim();
+  const r=SV.map((s,i)=>[s,i]).filter(([s])=>!q||(s[1]+s[2]).includes(q));
+  $("#svl").innerHTML=r.map(([s,i])=>`<div class="card"><div class="ico">${s[0]}</div><h3>${s[1]}</h3><p>${s[2]}</p><button class="btn o" data-open="${i}">ดูรายละเอียด</button></div>`).join("");
+  $("#sempty").hidden=!!r.length;
+}
+$("#sq").oninput=svc;
+
+// Modal
+function modal({t,d,l,g}){$("#mt").textContent=t;$("#md").textContent=d;$("#ml").innerHTML=l.map(x=>`<li>${x}</li>`).join("");$("#mg").textContent=g||"ดำเนินการต่อ";$("#modal").classList.add("on")}
+const closeM=()=>$("#modal").classList.remove("on");
+$("#mc").onclick=closeM;$("#mg").onclick=()=>{closeM();toast("ขั้นตอนถัดไป (ตัวอย่าง)")};
+$("#modal").onclick=e=>{if(e.target.id==="modal")closeM()};
+document.addEventListener("click",e=>{
+  const o=e.target.closest("[data-open]");
+  if(o){const s=SV[+o.dataset.open];if(o.tagName==="BUTTON"||o.classList.contains("tile")){if(o.classList.contains("tile")){location.hash="#services"}modal({t:s[1],d:s[2],l:s[3]});}}
+  const t=e.target.closest("[data-toast]");if(t){e.preventDefault();toast(t.dataset.toast)}
+  const c=e.target.closest("[data-copy]");if(c){e.preventDefault();try{navigator.clipboard.writeText(c.dataset.copy)}catch(_){}toast("คัดลอกที่อยู่แล้ว")}
+  if(!e.target.closest("nav,#menu"))$("#nav").classList.remove("open");
+});
+$("#menu").onclick=()=>$("#nav").classList.toggle("open");
+
+// Misc
+function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("on");clearTimeout(t._h);t._h=setTimeout(()=>t.classList.remove("on"),2000)}
+$("#theme").onclick=()=>{const r=document.documentElement,d=matchMedia("(prefers-color-scheme:dark)").matches;const cur=r.dataset.theme||(d?"dark":"light");r.dataset.theme=cur==="dark"?"light":"dark"};
+function goSearch(){const v=location.hash==="#services"?"#sq":"#nq";if(location.hash!=="#services")location.hash="#news";setTimeout(()=>$(v).focus(),80)}
+$("#srch").onclick=goSearch;
+addEventListener("keydown",e=>{if(e.key==="Escape")closeM();if(e.key==="/"&&!/INPUT|SELECT/.test(document.activeElement.tagName)){e.preventDefault();goSearch()}});
+addEventListener("scroll",()=>$("#top").classList.toggle("on",scrollY>400),{passive:true});
+$("#top").onclick=()=>scrollTo({top:0});
+news();svc();route();
+</script>
+</body>
+</html>
